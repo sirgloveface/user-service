@@ -21,7 +21,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint  {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
         
-        ErrorResponse error = new ErrorResponse("Acesso negado. Token inválido ou ausente.");
+        ErrorResponse error = new ErrorResponse("Acesso denegado. Token inválido o no suministrado.");
 
         OutputStream out = response.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();

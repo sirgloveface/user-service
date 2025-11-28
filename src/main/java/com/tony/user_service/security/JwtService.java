@@ -46,7 +46,7 @@ public class JwtService {
                 cachedSigningKey = Keys.hmacShaKeyFor(keyBytes);
             } catch (Exception e) {
                 System.err.println("ERROR FATAL: " + e.getMessage());
-                throw new RuntimeException("Falla inicializacion de llava jwt.", e);
+                throw new RuntimeException("Falla inicializacion de llave jwt.", e);
             }
         }
         return cachedSigningKey;

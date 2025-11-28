@@ -6,14 +6,14 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import lombok.NoArgsConstructor; // Adicionado explicitamente
-import lombok.AllArgsConstructor; // Adicionado explicitamente
+import lombok.NoArgsConstructor; 
+import lombok.AllArgsConstructor; 
 
 
 
 @Data
 @Builder
-@NoArgsConstructor // Necessário para frameworks como Spring e Jackson
+@NoArgsConstructor 
 @AllArgsConstructor
 public class UserResponseDTO {
     private UUID id;

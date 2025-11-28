@@ -172,4 +172,3 @@ Una vez que la aplicación esté en funcionamiento, accede a la documentación i
 2.  Haz clic en el botón **"Authorize"** (Autorizar) en la parte superior de la página de Swagger.
 3.  Inserta el token JWT en el campo BearerAuth (formato: Bearer <TU_TOKEN>).
 4.  Ahora, puedes probar las rutas **Protegidas** (aquellas que tienen la anotación BearerAuth).
-````

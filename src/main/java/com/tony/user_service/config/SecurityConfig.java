@@ -20,13 +20,14 @@ public class SecurityConfig {
     
     private static final String[] PUBLIC_WHITELIST = {
             "/swagger-ui/**",
+            "/swagger-ui.html",
             "/v3/api-docs/**",
             "/v3/api-docs",
-            "/api/users", 
-            "/swagger-ui.html",
-            "/v3/api-docs/*"
+            "/api-docs/**",
+            "/api-docs",
+            "/swagger-resources/**",
+            "/webjars/**"
     };
-
 
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
@@ -41,10 +42,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        
-  
-
-
         http
             .csrf(csrf -> csrf.disable()) 
             .exceptionHandling(exception -> exception
@@ -54,16 +51,13 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                   PUBLIC_WHITELIST
-                ).permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/users" ).permitAll() 
+                .requestMatchers(PUBLIC_WHITELIST).permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/users").permitAll() 
                 .anyRequest().authenticated()
             );
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        
+       http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-
-
 }

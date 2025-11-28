@@ -62,6 +62,51 @@ nota: se usa -DskipTests para saltar los test
 | **PUT/PATCH/DELETE** | /api/users/{id} | Actualización y eliminación de usuario. | **Protegida** (Requiere JWT) |
 
 
+
+## Diagrama de la solucion 
+
+```mermaid
+graph LR
+    %% --- Nodos ---
+    Client[("📱 CLIENT APP<br>(Web/Mobile)")]
+    
+    %% Capa de Seguridad y Controlador
+    JWT["🛡️ JWT<br>AUTHENTICATION<br>FILTER"]
+    Controller["⚙️ API GATEWAY /<br>SPRING BOOT<br>CONTROLLER"]
+    
+    %% Documentación
+    Swagger["📄 SWAGGER UI"]
+    
+    %% Capa de Servicio y Datos
+    Service["🧠 USER SERVICE<br>Lógica de negocio<br>y almacenamiento"]
+    Repo["🗃️ JPA REPOSITORY"]
+    DB[("💽 IN-MEMORY DATABASE<br>(H2/HSQLDB)")]
+
+    %% --- Conexiones ---
+    
+    %% 1. Flujo de Registro (POST va directo al controller en este diseño)
+    Client -- "POST /usuarios" --> Controller
+    Controller -- "1. Create user<br>2. Generate Token<br>3. Return 201 Created" --> Client
+
+    %% 2. Flujo Seguro (GET/PUT/DELETE pasan por el filtro)
+    Client -- "GET / PUT / DELETE<br>Auth: Bearer JWT" --> JWT
+    JWT -- "Validate Token" --> Controller
+
+    %% 3. Flujo Interno del Backend
+    Controller <--> Swagger
+    Controller <--> Service
+    Service <--> Repo
+    Repo <--> DB
+
+    %% --- Estilos  ---
+    classDef grey fill:#f5f5f5,stroke:#333,stroke-width:2px;
+    classDef white fill:#ffffff,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5;
+    
+    class Client,Controller,Service,Repo,DB grey;
+    class JWT,Swagger white;
+```
+
+
 ## Ejemplos de curl
 
 

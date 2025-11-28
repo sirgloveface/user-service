@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -21,9 +22,11 @@ import org.springframework.beans.factory.annotation.Value;
 @Setter
 public class UserRequestDTO {
 
+    @Schema(hidden = true)
     @Value("${app.validation.email-regex}")
     private String emailRegex;
 
+    @Schema(hidden = true)
     @Value("${app.validation.password-regex}")
     private String passwordRegex;
 
@@ -32,13 +35,13 @@ public class UserRequestDTO {
     private String name;
     
     @NotBlank(message = "El correo es obligatorio.")
-   // @Pattern(regexp = "${app.validation.email-regex}", message = "El correo no sigue el formato aaaaaaa@dominio.cl.")
+    // @Pattern(regexp = "${app.validation.email-regex}", message = "El correo no sigue el formato aaaaaaa@dominio.cl.")
     @JsonProperty("correo")
     private String email;
     
     @NotBlank(message = "La contraseña es obligatoria.")
-   // @Pattern(regexp = "${app.validation.password-regex}", 
-  //           message = "La contraseña debe tener entre 8-20 chars, mayúscula, minúscula, número y símbolo.")
+    // @Pattern(regexp = "${app.validation.password-regex}", 
+    //         message = "La contraseña debe tener entre 8-20 chars, mayúscula, minúscula, número y símbolo.")
     @JsonProperty("contrasena")
     private String password;
 

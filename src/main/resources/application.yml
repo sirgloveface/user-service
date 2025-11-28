@@ -1,0 +1,13 @@
+logging:
+  level:
+    org.springframework.boot.web.embedded.tomcat: INFO 
+    
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: w5fV6yJ2rL4nM8hG0oP7qD3rF9sE4tY0uA2bX1cZ3eD5f7h9j1kL3mO5pQ7rS9tU1vW3xY5zB7cD9eF0gH2iJ4kL6mN8pP0qR2sT4uV6wX8yZ0aC2dE4f6h8j
+  validation:
+    email-regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$" 
+    password-regex: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$" 
